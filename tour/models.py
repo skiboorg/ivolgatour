@@ -1,0 +1,150 @@
+from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils.safestring import mark_safe
+from pytils.translit import slugify
+from random import choices
+import string
+
+class Country(models.Model):
+    name = models.CharField('Страна', max_length=100, blank=False, null=True)
+
+    def __str__(self):
+        return '{} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Страна"
+        verbose_name_plural = "Страны"
+
+class Town(models.Model):
+    name = models.CharField('Город', max_length=100, blank=False, null=True)
+
+    def __str__(self):
+        return '{} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Город"
+        verbose_name_plural = "Города"
+
+class Resort(models.Model):
+    name = models.CharField('Курорт', max_length=100, blank=False, null=True)
+    def __str__(self):
+        return '{} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Курорт"
+        verbose_name_plural = "Курорты"
+
+class TourOption(models.Model):
+    name = models.CharField('Опция', max_length=100, blank=False, null=True)
+    def __str__(self):
+        return '{} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Опция"
+        verbose_name_plural = "Опции"
+
+class TourFood(models.Model):
+    name = models.CharField('Питание', max_length=100, blank=False, null=True)
+    def __str__(self):
+        return '{} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Вариант питания"
+        verbose_name_plural = "Варианты питания"
+
+class Hotel(models.Model):
+    name = models.CharField('Отель', max_length=100, blank=False, null=True)
+    category = models.IntegerField('Категория (1-5), если указано 0, то категория не отображается', default=0)
+    def __str__(self):
+        return '{} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Отель"
+        verbose_name_plural = "Отели"
+
+
+class Tour(models.Model):
+    name = models.CharField('Название тура', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=100, blank=False, null=True, db_index=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True, db_index=True)
+
+    short_description = models.TextField('Краткое описание для главной', blank=False)
+    description = RichTextUploadingField('Полное описание тура', blank=False, null=True)
+    date = models.DateTimeField('Дата', blank=True, null=True)
+
+    hotel = models.ForeignKey(Hotel, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Отель')
+    flyFrom = models.ForeignKey(Town, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Вылет из',
+                                related_name='flyfrom')
+    flyTo = models.ForeignKey(Town, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Прилет в',
+                              related_name='flyto')
+    food = models.ForeignKey(TourFood, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Питание')
+    includedOptions = models.ManyToManyField(TourOption, verbose_name='Входит в стоимость',
+                                             related_name='includedOptions')
+    excludedOptions = models.ManyToManyField(TourOption, verbose_name='Не входит в стоимость',
+                                             related_name='excludedOptions')
+
+    personCount = models.IntegerField('Кол-во человек', default=0)
+    previewImage = models.ImageField('Изображение превью (270 x 220)', upload_to='tour_img/', blank=False)
+    headerImage = models.ImageField('Изображение шапки страницы полного описания тура (1920x210)', upload_to='tour_img/', blank=False)
+
+    pageH1 = models.CharField('Тег H1', max_length=255, blank=True, null=True)
+    pageTitle = models.CharField('Название страницы SEO', max_length=255, blank=True, null=True)
+    pageDescription = models.CharField('Описание страницы SEO', max_length=255, blank=True, null=True)
+    pageKeywords = models.TextField('Keywords SEO', blank=True, null=True)
+
+    priceDollar = models.IntegerField('Стоимость в долларах', default=0)
+    discountPriceDollar = models.IntegerField('Стоимость со скидкой в долларах', default=0)
+    priceEuro = models.IntegerField('Стоимость в евро', default=0)
+    discountPriceEuro = models.IntegerField('Стоимость со скидкой в евро', default=0)
+    priceRub = models.IntegerField('Стоимость в рублях', default=0)
+    discountPriceRub = models.IntegerField('Стоимость со скидкой в рублях', default=0)
+
+    length = models.IntegerField('Продолжительность тура', default=0)
+    isHot = models.BooleanField('Отображать на баннере?', default=False)
+    isAtIndex = models.BooleanField('Отображать на главной?', default=False)
+    isActive = models.BooleanField('Отображать в списке туров?', default=True)
+    views = models.IntegerField('Просмотров', default=0)
+    rating = models.IntegerField('Рейтинг от 1 до 5', default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = Tour.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(Tour, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return f'/tour/{self.nameSlug}/'
+
+    def __str__(self):
+        return 'Тур : {} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Тур"
+        verbose_name_plural = "Туры"
+
+
+class TourImage(models.Model):
+    tour = models.ForeignKey(Tour, blank=False, null=True, on_delete=models.CASCADE, verbose_name='Изображение для')
+    image = models.ImageField('Изображение', upload_to='tour_img', blank=False)
+
+    def __str__(self):
+        return 'Изображение для тура : {} '.format(self.tour.name)
+
+    class Meta:
+        verbose_name = "Изображение для тура"
+        verbose_name_plural = "Изображения для туров"
+
+    def image_tag(self):
+        # used in the admin site model as a "thumbnail"
+        if self.image:
+            return mark_safe('<img src="{}" width="150" height="150" />'.format(self.image.url))
+        else:
+            return mark_safe('<span>НЕТ МИНИАТЮРЫ</span>')
+
+    image_tag.short_description = 'Картинка'
