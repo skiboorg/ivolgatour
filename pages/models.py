@@ -3,13 +3,13 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class Banner(models.Model):
     order = models.IntegerField('Номер по порядку', default=1)
-    bannerOffer = models.CharField('Категория баннера (20символов)', max_length=20, blank=False)
-    bigTextColored = models.CharField('Заголовок на баннере выделенный цветом (10символов)', max_length=10, blank=False, null=True)
+    bannerOffer = models.CharField('Категория баннера (20символов)', max_length=20, blank=True)
+    bigTextColored = models.CharField('Заголовок на баннере выделенный цветом (10символов)', max_length=10, blank=True, null=True)
     bigText = models.CharField('Заголовок на баннере (30 символов)', max_length=30, blank=False, null=True)
-    smallText = models.CharField('Описание на баннере (160 символов)', max_length=160, blank=False, null=True)
-    image = models.ImageField('Картинка для баннера (1920 x (700-900))', upload_to='banners/', blank=True)
-    buttonText = models.CharField('Надпись на кнопке', max_length=10, blank=False)
-    buttonUrl = models.CharField('Ссылка с кнопки', max_length=100, blank=False)
+    smallText = models.CharField('Описание на баннере (160 символов)', max_length=160, blank=True, null=True)
+    image = models.ImageField('Картинка для баннера (1920 x (700-900))', upload_to='banners/', blank=False)
+    buttonText = models.CharField('Надпись на кнопке', max_length=10, blank=True)
+    buttonUrl = models.CharField('Ссылка с кнопки', max_length=100, blank=True)
     isActive = models.BooleanField('Отображать баннер?', default=True)
 
     def __str__(self):

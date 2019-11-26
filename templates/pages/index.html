@@ -24,50 +24,39 @@
 	<div class="arrows">
 		<div class="swiper-container main-slider-6" data-autoplay="0" data-loop="1" data-speed="900" data-center="0" data-slides-per-view="1">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide active" data-val="0">
+                {% for banner in allBanners %}
+				<div class="swiper-slide {% if forloop.counter == 1 %}active{% endif %}" data-val="{{ banner.id }}">
 						<div class="clip">
-							<div class="bg bg-bg-chrome act" style="background-image:url(img/home_7/slide_1.jpg)"></div>
+							<div class="bg bg-bg-chrome act" style="background-image:url({{ banner.image.url }})"></div>
 						</div>
 						<div class="vertical-align">
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 									    <div class="main-title style-3 left">
-									   		<h4 class="category color-white-light">best offer</h4>
-										 	<h1><span class="color-sea">-20% off</span><br>
-										 	sea tours only<br>
-										 	this month</h1>
-										 	<p class="color-white-light">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id pharetra lacus, et hendrerit mi quis leo elementum. Lorem ipsum dolor sit.</p>
+                                            {% if banner.bannerOffer %}
+									   		<h4 class="category color-white-light">{{ banner.bannerOffer }}</h4>
+                                            {% endif %}
+										 	<h1>
+                                                {% if banner.bigTextColored %}
+                                                <span class="color-sea">{{ banner.bigTextColored }}</span><br>
+                                                {% endif %}
+										 	{{ banner.bigText }}
+                                            </h1>
+                                            {% if banner.smallText %}
+										 	<p class="color-white-light">{{ banner.smallText }}</p>
+                                        {% endif %}
 										 	<div class="clearfix"></div>
-										 	<a href="#" class="c-button b-60 bg-sea hv-sea-o delay-2"><span>view more</span></a>
+                                        {% if banner.buttonText %}
+										 	<a href="{{ banner.buttonUrl }}" class="c-button b-60 bg-sea hv-sea-o delay-2"><span>{{ banner.buttonText }}</span></a>
+                                        {% endif %}
 									    </div>
 									</div>
 								</div>
 							</div>
 						</div>
 				</div>
-				<div class="swiper-slide" data-val="1">
-						<div class="clip">
-							<div class="bg bg-bg-chrome act" style="background-image:url(img/home_6/slide_4.jpg)"></div>
-						</div>
-						<div class="vertical-align">
-							<div class="container">
-								<div class="row">
-									<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-									    <div class="main-title style-3 left">
-									   		<h4 class="category color-white-light">best offer</h4>
-										 	<h1><span class="color-sea">-20% off</span><br>
-										 	sea tours only<br>
-										 	this month</h1>
-										 	<p class="color-white-light">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id pharetra lacus, et hendrerit mi quis leo elementum. Lorem ipsum dolor sit.</p>
-										 	<div class="clearfix"></div>
-										 	<a href="#" class="c-button b-60 bg-sea hv-sea-o delay-2"><span>view more</span></a>
-									    </div>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
+				{% endfor %}
 			</div>
 			<div class="pagination pagination-hidden poin-style-1"></div>
 		    <div class="arrow-wrapp arr-s-4">

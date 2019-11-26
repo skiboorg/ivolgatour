@@ -61,7 +61,7 @@ class GlobalRegion(models.Model):
 
 
 class Country(models.Model):
-    globalRegion = models.ForeignKey(GlobalRegion, blank=False, null=True, verbose_name='Глобальный регион')
+    globalRegion = models.ForeignKey(GlobalRegion, blank=False, null=True, on_delete=models.CASCADE, verbose_name='Глобальный регион')
     name = models.CharField('Страна', max_length=100, blank=False, null=True)
     nameLower = models.CharField(max_length=255, blank=True, null=True)
     nameSlug = models.CharField(max_length=255, blank=True, null=True)
@@ -86,7 +86,6 @@ class Country(models.Model):
 
 
 class Town(models.Model):
-    country = models.ForeignKey(Country, blank=False, null=True, verbose_name='Страна')
     name = models.CharField('Город', max_length=100, blank=False, null=True)
     nameLower = models.CharField(max_length=255, blank=True, null=True)
     nameSlug = models.CharField(max_length=255, blank=True, null=True)
@@ -111,7 +110,6 @@ class Town(models.Model):
 
 
 class Resort(models.Model):
-    town = models.ForeignKey(Town, blank=False, null=True, verbose_name='Город')
     name = models.CharField('Курорт', max_length=100, blank=False, null=True)
     nameLower = models.CharField(max_length=255, blank=True, null=True)
     nameSlug = models.CharField(max_length=255, blank=True, null=True)
@@ -184,7 +182,6 @@ class TourFood(models.Model):
 
 
 class Hotel(models.Model):
-    town = models.ForeignKey(Town, blank=False, null=True, verbose_name='Город')
     name = models.CharField('Отель', max_length=100, blank=False, null=True)
     nameLower = models.CharField(max_length=255, blank=True, null=True)
     nameSlug = models.CharField(max_length=255, blank=True, null=True)

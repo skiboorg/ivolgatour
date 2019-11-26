@@ -852,7 +852,7 @@ nav .dropmenu li:hover .dropmenu {visibility: visible; opacity: 1;transform: sca
 
 nav li.type-1:nth-last-child(1) .dropmenu, nav li.type-1:nth-last-child(2) .dropmenu, nav li.type-1:nth-last-child(3) .dropmenu { left: auto; right: 0px; }
 
-nav li.type-1:nth-last-child(1) .dropmenu .dropmenu, nav li.type-1:nth-last-child(2) .dropmenu .dropmenu, nav li.type-1:nth-last-child(3) .dropmenu .dropmenu { left: auto; right: 100%; }
+nav li.type-1:nth-last-child(1) .dropmenu .dropmenu, nav li.type-1:nth-last-child(2) .dropmenu .dropmenu, nav li.type-1:nth-last-child(3) .dropmenu .dropmenu { left: 100%; right: auto; }
 
 nav li.type-2 { position: static; }
 
@@ -5257,7 +5257,7 @@ header.menu-3.hovered.scrol .nav {padding: 0px;}
 header.menu-3.hovered.scrol .logo {top: 50%;}
 header.menu-3.hovered.scrol nav > ul > li {padding: 15px 10px;}
 header.menu-3.hovered .logo { position: absolute; top: 50%; margin-top: 0px; transform: translateY(-50%); -webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);-ms-transform: translateY(-50%);}
-header.menu-3.hovered nav .dropmenu a > span {display: none;}
+/*header.menu-3.hovered nav .dropmenu a > span {display: none;}*/
 
 .bg-dark.type-2 {background: #060c17; color: #fff;}
 .bg-dark.type-2 .bg-black {background: #040914;}

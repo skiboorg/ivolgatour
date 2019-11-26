@@ -106,6 +106,7 @@ INSTALLED_APPS = [
     'tour.apps.TourConfig',
     'blog.apps.BlogConfig',
     'callback.apps.CallbackConfig',
+    'comment.apps.CommentConfig'
 
 ]
 
