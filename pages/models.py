@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Banner(models.Model):
     order = models.IntegerField('Номер по порядку', default=1)
@@ -36,10 +37,12 @@ class SeoTag(models.Model):
                                         null=True)
     contactKeywords = models.TextField('Тег Keywords для страницы контакты', blank=True, null=True)
 
+    indexSeoText = RichTextUploadingField('СЕО тектс для главной', blank=True, null=True)
+
 
     def __str__(self):
-        return 'Теги для статических страниц'
+        return 'Теги и тексты для статических страниц'
 
     class Meta:
-        verbose_name = "Теги для статических страниц"
-        verbose_name_plural = "Теги для статических страниц"
+        verbose_name = "Теги и тексты для статических страниц"
+        verbose_name_plural = "Теги и тексты для статических страниц"

@@ -5,8 +5,77 @@ from pytils.translit import slugify
 from random import choices
 import string
 
+
+class TourVariant(models.Model):
+    name = models.CharField('Вид тура', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=255, blank=True, null=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True)
+    pageH1 = models.CharField('Тег H1', max_length=255, blank=True, null=True)
+    pageTitle = models.CharField('Название страницы SEO', max_length=255, blank=True, null=True)
+    pageDescription = models.CharField('Описание страницы SEO', max_length=255, blank=True, null=True)
+    pageKeywords = models.TextField('Keywords SEO', blank=True, null=True)
+    pageSeoText = RichTextUploadingField('Полное описание вида тура', blank=True, null=True)
+
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = TourVariant.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(TourVariant, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return '{} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Вид тура"
+        verbose_name_plural = "Виды туров"
+
+
+class GlobalRegion(models.Model):
+    name = models.CharField('Глобальный регион (например, Америка, Азия)', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=255, blank=True, null=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = GlobalRegion.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(GlobalRegion, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return '{} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Глобальный регион "
+        verbose_name_plural = "Глобальные регионы "
+
+
 class Country(models.Model):
+    globalRegion = models.ForeignKey(GlobalRegion, blank=False, null=True, verbose_name='Глобальный регион')
     name = models.CharField('Страна', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=255, blank=True, null=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = Country.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(Country, self).save(*args, **kwargs)
 
     def __str__(self):
         return '{} '.format(self.name)
@@ -15,8 +84,23 @@ class Country(models.Model):
         verbose_name = "Страна"
         verbose_name_plural = "Страны"
 
+
 class Town(models.Model):
+    country = models.ForeignKey(Country, blank=False, null=True, verbose_name='Страна')
     name = models.CharField('Город', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=255, blank=True, null=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = Town.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(Town, self).save(*args, **kwargs)
 
     def __str__(self):
         return '{} '.format(self.name)
@@ -25,8 +109,24 @@ class Town(models.Model):
         verbose_name = "Город"
         verbose_name_plural = "Города"
 
+
 class Resort(models.Model):
+    town = models.ForeignKey(Town, blank=False, null=True, verbose_name='Город')
     name = models.CharField('Курорт', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=255, blank=True, null=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = Resort.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(Resort, self).save(*args, **kwargs)
+
     def __str__(self):
         return '{} '.format(self.name)
 
@@ -34,8 +134,23 @@ class Resort(models.Model):
         verbose_name = "Курорт"
         verbose_name_plural = "Курорты"
 
+
 class TourOption(models.Model):
     name = models.CharField('Опция', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=255, blank=True, null=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = TourOption.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(TourOption, self).save(*args, **kwargs)
+
     def __str__(self):
         return '{} '.format(self.name)
 
@@ -43,8 +158,23 @@ class TourOption(models.Model):
         verbose_name = "Опция"
         verbose_name_plural = "Опции"
 
+
 class TourFood(models.Model):
     name = models.CharField('Питание', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=255, blank=True, null=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = TourFood.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(TourFood, self).save(*args, **kwargs)
+
     def __str__(self):
         return '{} '.format(self.name)
 
@@ -52,9 +182,25 @@ class TourFood(models.Model):
         verbose_name = "Вариант питания"
         verbose_name_plural = "Варианты питания"
 
+
 class Hotel(models.Model):
+    town = models.ForeignKey(Town, blank=False, null=True, verbose_name='Город')
     name = models.CharField('Отель', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=255, blank=True, null=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True)
     category = models.IntegerField('Категория (1-5), если указано 0, то категория не отображается', default=0)
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = Hotel.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(Hotel, self).save(*args, **kwargs)
+
     def __str__(self):
         return '{} '.format(self.name)
 
@@ -72,6 +218,7 @@ class Tour(models.Model):
     description = RichTextUploadingField('Полное описание тура', blank=False, null=True)
     date = models.DateTimeField('Дата', blank=True, null=True)
 
+    variant = models.ManyToManyField(TourVariant, verbose_name='Вид тура')
     hotel = models.ForeignKey(Hotel, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Отель')
     flyFrom = models.ForeignKey(Town, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Вылет из',
                                 related_name='flyfrom')

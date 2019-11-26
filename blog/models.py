@@ -28,7 +28,6 @@ class BlogPost(models.Model):
             if testSlug:
                 slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
             self.name_slug = slug + slugRandom
-
         super(BlogPost, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
