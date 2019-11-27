@@ -1,0 +1,28 @@
+{% extends  'basic.html' %}
+{% load static %}
+
+{% block title %}
+   {{ pageTitle }}
+{% endblock %}
+
+{% block keywords %}
+    {{ pageKeywords }}
+{% endblock %}
+
+{% block description %}
+    {{ pageDescription }}
+{% endblock %}
+{% block css %}
+
+    {{ block.super }}
+{% endblock %}
+
+
+
+{% block content %}
+
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+{% endblock %}

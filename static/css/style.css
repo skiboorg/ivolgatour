@@ -850,7 +850,7 @@ nav .dropmenu .dropmenu { visibility: hidden; opacity: 0; transform: scale(1.01)
 nav .dropmenu li:hover .dropmenu {visibility: visible; opacity: 1;transform: scale(1); -webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);}
 
 
-nav li.type-1:nth-last-child(1) .dropmenu, nav li.type-1:nth-last-child(2) .dropmenu, nav li.type-1:nth-last-child(3) .dropmenu { left: auto; right: 0px; }
+nav li.type-1:nth-last-child(1) .dropmenu, nav li.type-1:nth-last-child(2) .dropmenu, nav li.type-1:nth-last-child(3) .dropmenu { left: 0; right: auto; }
 
 nav li.type-1:nth-last-child(1) .dropmenu .dropmenu, nav li.type-1:nth-last-child(2) .dropmenu .dropmenu, nav li.type-1:nth-last-child(3) .dropmenu .dropmenu { left: 100%; right: auto; }
 

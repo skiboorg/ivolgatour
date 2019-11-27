@@ -47,8 +47,12 @@
 										 	<p class="color-white-light">{{ banner.smallText }}</p>
                                         {% endif %}
 										 	<div class="clearfix"></div>
-                                        {% if banner.buttonText %}
+                                        {% if banner.buttonUrl %}
 										 	<a href="{{ banner.buttonUrl }}" class="c-button b-60 bg-sea hv-sea-o delay-2"><span>{{ banner.buttonText }}</span></a>
+                                        {% endif %}
+                                        {% if banner.tourUrl %}
+                                            	<a href="{{ banner.tourUrl.get_absolute_url }}" class="c-button b-60 bg-sea hv-sea-o delay-2"><span>{{ banner.buttonText }}</span></a>
+                                           
                                         {% endif %}
 									    </div>
 									</div>
@@ -70,11 +74,12 @@
 </div>
 
 <div class="top-preview row no-margin">
+{% for tour in bannerTours %}
 	<div class="col-xs-12 col-sm-6 col-md-3 no-padding">
     	<div class="tp_entry">
     		<div class="tp_image">
-				<img class="center-image" src="img/home_7/slide_preview_1.jpg" alt="">
-				<div class="price price-s-2">$600</div>
+				<img class="center-image" src="{{ tour.previewImage.url }}" alt="">
+				<div class="price price-s-2">{{ tour.priceDollar }}</div>
     		</div>
     		<div class="tp_content">
       	        <div class="rate-wrap">
@@ -87,77 +92,12 @@
 					</div>
 				    <i>485 rewies</i>
                 </div>
-          	    <h4><b><a href="#">tours in monaco</a></b></h4>
+          	    <h4><b><a href="#">{{ tour.name }}</a></b></h4>
            	 	<div class="date">July <strong>19th</strong> to July <strong>26th</strong></div>
     		</div>
     	</div>
 	</div>
-	<div class="col-xs-12 col-sm-6 col-md-3 no-padding">
-    	<div class="tp_entry">
-    		<div class="tp_image">
-				<img class="center-image" src="img/home_7/slide_preview_2.jpg" alt="">
-				<div class="price price-s-2">$600</div>
-    		</div>
-    		<div class="tp_content">
-      	        <div class="rate-wrap">
-          	        <div class="rate">
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-					</div>
-				    <i>485 rewies</i>
-                </div>
-				<h4><b><a href="#">tours in monaco</a></b></h4>
-           	 	<div class="date">July <strong>19th</strong> to July <strong>26th</strong></div>
-    		</div>
-    	</div>
-	</div>
-	<div class="col-xs-12 col-sm-6 col-md-3 no-padding">
-    	<div class="tp_entry">
-    		<div class="tp_image">
-				<img class="center-image" src="img/home_7/slide_preview_3.jpg" alt="">
-				<div class="price price-s-2">$600</div>
-    		</div>
-    		<div class="tp_content">
-      	        <div class="rate-wrap">
-          	        <div class="rate">
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-					</div>
-				    <i>485 rewies</i>
-                </div>
-				<h4><b><a href="#">tours in monaco</a></b></h4>
-           	 	<div class="date">July <strong>19th</strong> to July <strong>26th</strong></div>
-    		</div>
-    	</div>
-	</div>
-	<div class="col-xs-12 col-sm-6 col-md-3 no-padding">
-    	<div class="tp_entry">
-    		<div class="tp_image">
-				<img class="center-image" src="img/home_7/slide_preview_4.jpg" alt="">
-				<div class="price price-s-2">$600</div>
-    		</div>
-    		<div class="tp_content">
-      	        <div class="rate-wrap">
-          	        <div class="rate">
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-						<span class="fa fa-star color-yellow"></span>
-					</div>
-				    <i>485 rewies</i>
-                </div>
-				<h4><b><a href="#">tours in monaco</a></b></h4>
-           	 	<div class="date">July <strong>19th</strong> to July <strong>26th</strong></div>
-    		</div>
-    	</div>
-	</div>
+{% endfor %}
 </div>
 
 <!--ICON-BLOCK-->

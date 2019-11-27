@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
+from tour.models import Tour
 
 class Banner(models.Model):
     order = models.IntegerField('Номер по порядку', default=1)
@@ -9,7 +10,8 @@ class Banner(models.Model):
     smallText = models.CharField('Описание на баннере (160 символов)', max_length=160, blank=True, null=True)
     image = models.ImageField('Картинка для баннера (1920 x (700-900))', upload_to='banners/', blank=False)
     buttonText = models.CharField('Надпись на кнопке', max_length=10, blank=True)
-    buttonUrl = models.CharField('Ссылка с кнопки', max_length=100, blank=True)
+    buttonUrl = models.CharField('Произвольная сылка с кнопки', max_length=100, blank=True)
+    tourUrl = models.ForeignKey(Tour, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Кнопка ссылается на тур')
     isActive = models.BooleanField('Отображать баннер?', default=True)
 
     def __str__(self):

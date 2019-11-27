@@ -61,7 +61,8 @@ class GlobalRegion(models.Model):
 
 
 class Country(models.Model):
-    globalRegion = models.ForeignKey(GlobalRegion, blank=False, null=True, on_delete=models.CASCADE, verbose_name='Глобальный регион')
+    globalRegion = models.ForeignKey(GlobalRegion, blank=False, null=True, on_delete=models.CASCADE,
+                                     verbose_name='Глобальный регион', related_name='global_region')
     name = models.CharField('Страна', max_length=100, blank=False, null=True)
     nameLower = models.CharField(max_length=255, blank=True, null=True)
     nameSlug = models.CharField(max_length=255, blank=True, null=True)
@@ -216,6 +217,7 @@ class Tour(models.Model):
     date = models.DateTimeField('Дата', blank=True, null=True)
 
     variant = models.ManyToManyField(TourVariant, verbose_name='Вид тура')
+    country = models.ForeignKey(Country, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Страна')
     hotel = models.ForeignKey(Hotel, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Отель')
     flyFrom = models.ForeignKey(Town, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Вылет из',
                                 related_name='flyfrom')

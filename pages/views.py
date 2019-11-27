@@ -1,10 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
+from tour.models import *
 from django.contrib import messages
 
 def index(request):
     allBanners = Banner.objects.filter(isActive=True).order_by('order')
+    allRegions = GlobalRegion.objects.all()
+    allTypes = TourVariant.objects.all()
+    bannerTours = Tour.objects.filter(isHot=True)
     # try:
     #     seotag = SeoTag.objects.first()
     #     pageTitle = seotag.indexTitle.replace('%TOWN%',subdomain.town).replace('%TOWN_ALIAS%', subdomain.townAlias)
