@@ -63,6 +63,7 @@ class GlobalRegion(models.Model):
 class Country(models.Model):
     globalRegion = models.ForeignKey(GlobalRegion, blank=False, null=True, on_delete=models.CASCADE,
                                      verbose_name='Глобальный регион', related_name='global_region')
+    image = models.ImageField('Картинка ', upload_to='country_img/', blank=False)
     name = models.CharField('Страна', max_length=100, blank=False, null=True)
     nameLower = models.CharField(max_length=255, blank=True, null=True)
     nameSlug = models.CharField(max_length=255, blank=True, null=True)
@@ -246,7 +247,6 @@ class Tour(models.Model):
     discountPriceRub = models.IntegerField('Стоимость со скидкой в рублях', default=0)
 
     length = models.IntegerField('Продолжительность тура', default=0)
-    isHot = models.BooleanField('Отображать на баннере?', default=False)
     isAtIndex = models.BooleanField('Отображать на главной?', default=False)
     isActive = models.BooleanField('Отображать в списке туров?', default=True)
     views = models.IntegerField('Просмотров', default=0)

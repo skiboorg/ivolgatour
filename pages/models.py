@@ -4,15 +4,27 @@ from tour.models import Tour
 
 class Banner(models.Model):
     order = models.IntegerField('Номер по порядку', default=1)
-    bannerOffer = models.CharField('Категория баннера (20символов)', max_length=20, blank=True)
-    bigTextColored = models.CharField('Заголовок на баннере выделенный цветом (10символов)', max_length=10, blank=True, null=True)
-    bigText = models.CharField('Заголовок на баннере (30 символов)', max_length=30, blank=False, null=True)
+    smallOffer = models.CharField('Первый заголовок на баннере (чтобы выделить цветом слово или фразу используйте выражение : @@текст## )', max_length=30, blank=True, null=True)
+    smallOfferReplaced = models.CharField(max_length=255, blank=True, null=True)
+    bigOffer = models.CharField('Заголовок на баннере (30 символов)', max_length=30, blank=False, null=True)
     smallText = models.CharField('Описание на баннере (160 символов)', max_length=160, blank=True, null=True)
     image = models.ImageField('Картинка для баннера (1920 x (700-900))', upload_to='banners/', blank=False)
-    buttonText = models.CharField('Надпись на кнопке', max_length=10, blank=True)
-    buttonUrl = models.CharField('Произвольная сылка с кнопки', max_length=100, blank=True)
-    tourUrl = models.ForeignKey(Tour, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Кнопка ссылается на тур')
+
+    # bannerUrl = models.CharField('Произвольная ссылка с баннера', max_length=100, blank=True)
+    # tourUrl = models.ForeignKey(Tour, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Баннер ссылается на тур')
     isActive = models.BooleanField('Отображать баннер?', default=True)
+
+
+    def save(self, *args, **kwargs):
+        if not self.smallOffer:
+            self.smallOfferReplaced = None
+        if not '@@' or not '##' in self.smallOffer:
+            self.smallOfferReplaced = None
+        else:
+            self.smallOfferReplaced = self.smallOffer.replace('@@', '<span class="color-blue-2 f-32">').replace('##', '</span>')
+
+
+        super(Banner, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'Баннер № П/П {self.order}'
