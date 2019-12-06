@@ -90,7 +90,7 @@ admin.site.register(TourOption, TourOptionAdmin)
 admin.site.register(TourFood, TourFoodAdmin)
 admin.site.register(Hotel, HotelAdmin)
 admin.site.register(Tour, TourAdmin)
-admin.site.register(TourImage)
+# admin.site.register(TourImage)
 
 
 

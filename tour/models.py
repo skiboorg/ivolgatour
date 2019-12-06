@@ -63,8 +63,10 @@ class GlobalRegion(models.Model):
 class Country(models.Model):
     globalRegion = models.ForeignKey(GlobalRegion, blank=False, null=True, on_delete=models.CASCADE,
                                      verbose_name='Глобальный регион', related_name='global_region')
-    image = models.ImageField('Картинка ', upload_to='country_img/', blank=False)
+    image = models.ImageField('Картинка превью', upload_to='country_img/', blank=False)
+    imageHeader = models.ImageField('Картинка для шапки', upload_to='country_img/', blank=False)
     name = models.CharField('Страна', max_length=100, blank=False, null=True)
+    isPopular = models.BooleanField('Показывать в популярных направлениях ?', default=False)
     nameLower = models.CharField(max_length=255, blank=True, null=True)
     nameSlug = models.CharField(max_length=255, blank=True, null=True)
 
@@ -247,7 +249,9 @@ class Tour(models.Model):
     discountPriceRub = models.IntegerField('Стоимость со скидкой в рублях', default=0)
 
     length = models.IntegerField('Продолжительность тура', default=0)
-    isAtIndex = models.BooleanField('Отображать на главной?', default=False)
+
+    isPopular = models.BooleanField('Показывать в популярных турах ?', default=False)
+    badge = models.CharField('Бейдж тура (выводится на карточке тура)', max_length=10, blank=True, null=True)
     isActive = models.BooleanField('Отображать в списке туров?', default=True)
     views = models.IntegerField('Просмотров', default=0)
     rating = models.IntegerField('Рейтинг от 1 до 5', default=0)

@@ -19,7 +19,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pages.urls')),
     #path('sitemap.xml', sitemap, {'sitemaps':sitemaps}),
-    # path('item/', include('item.urls')),
+    path('tour/', include('tour.urls')),
     # path('cart/', include('cart.urls')),
     # path('user/', include('customuser.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
