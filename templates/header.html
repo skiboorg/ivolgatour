@@ -12,7 +12,7 @@
 		    </div>
    	  	 	<nav class="menu">
 			  	<ul>
-                    <li class="type-1 active">
+                    <li class="type-1 {{ homeactive }}">
 						<a href="#">о компании</a>
 					</li>
                     <li class="type-1">
@@ -21,11 +21,11 @@
                     <li class="type-1">
 						<a href="#">туристам</a>
 					</li>
-                    <li class="type-1"><a href="#">виды туров<span class="fa fa-angle-down"></span></a>
+                    <li class="type-1 {{ tourtypeactive }}"><a href="#">виды туров<span class="fa fa-angle-down"></span></a>
 						<ul class="dropmenu">
                             {% for type in allTypes %}
 							<li>
-                                <a href="#">{{ type.name }}</a>
+                                <a href="{% url 'showtour_by_type' type.nameSlug %}">{{ type.name }}</a>
                             </li>
                             {% endfor %}
 
@@ -34,10 +34,10 @@
                     <li class="type-1"><a href="#">страны<span class="fa fa-angle-down"></span></a>
 						<ul class="dropmenu">
                             {% for region in allRegions %}
-							<li><a href="#">{{ region.name }} <span class="fa fa-chevron-right"></span></a>
+							<li><a href="{% url 'showtour_by_globalregion' region.nameSlug %}">{{ region.name }} <span class="fa fa-chevron-right"></span></a>
                                <ul class="dropmenu">
                                    {% for country in region.global_region.all %}
-									    <li><a href="#">{{ country.name }}</a></li>
+									    <li><a href="{% url 'showtour_by_destination' country.nameSlug %}">{{ country.name }}</a></li>
 								   {% endfor %}
 								</ul>
                             </li>
@@ -48,7 +48,7 @@
 						<a href="#">курс валют</a>
 					</li>
                       <li class="type-1">
-						<a href="#">контакты</a>
+						<a href="{% url 'contacts'%}">контакты</a>
 					</li>
 
 

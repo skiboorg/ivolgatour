@@ -1,0 +1,32 @@
+{% load static %}
+<div class="col-mob-12 col-xs-6 col-sm-6 col-md-3 col-lg-3">
+    <div class="hotel-item style-4">
+        <div class="radius-top">
+            <img src="{{ tour.previewImage.url }}" alt="">
+        </div>
+        <div class="title">
+            <div class="hotel-place color-dark-2 clearfix">{{ tour.country.name }}
+                {% if tour.badge %}
+                    <span class="hotel-hot color-dark-2-light fr">{{ tour.badge }}</span>
+                {% endif %}
+            </div>
+            <h4><b>{{ tour.name }}</b></h4>
+            <div class="rate-wrap">
+                <div class="rate">
+                    <span class="fa fa-star color-yellow"></span>
+                    <span class="fa fa-star color-yellow"></span>
+                    <span class="fa fa-star color-yellow"></span>
+                    <span class="fa fa-star color-yellow"></span>
+                    <span class="fa fa-star color-yellow"></span>
+                </div>
+                <i>в разработке</i>
+            </div>
+            <span class="f-14 people">{{ tour.hotel.name }}</span>
+            <p class="f-14">{{ tour.short_description }}</p>
+            <div class="clearfix">
+                <a href="{% url 'showtour' tour.nameSlug %}" class="c-button b-40 bg-grey-3-t hv-grey-3-t ">подробнее</a>
+                <a href="#" class="c-button b-40 bg-blue-3 hv-blue-3-o">заказать</a>
+            </div>
+        </div>
+    </div>
+</div>

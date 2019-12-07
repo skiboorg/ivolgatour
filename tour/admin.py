@@ -80,6 +80,11 @@ class TourAdmin(admin.ModelAdmin):
     class Meta:
         model = Tour
 
+class TagAdmin(admin.ModelAdmin):
+    exclude = ['nameSlug', 'nameLower']
+
+    class Meta:
+        model = Tag
 
 admin.site.register(GlobalRegion, GlobalRegionAdmin)
 admin.site.register(TourVariant, TourVariantAdmin)
@@ -90,6 +95,7 @@ admin.site.register(TourOption, TourOptionAdmin)
 admin.site.register(TourFood, TourFoodAdmin)
 admin.site.register(Hotel, HotelAdmin)
 admin.site.register(Tour, TourAdmin)
+admin.site.register(Tag, TagAdmin)
 # admin.site.register(TourImage)
 
 

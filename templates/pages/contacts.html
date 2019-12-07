@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-   {{ pageTitle }}
+    {{ pageTitle }}
 {% endblock %}
 
 {% block keywords %}
@@ -20,9 +20,131 @@
 
 
 {% block content %}
+   <!-- MAP BLOCK -->
+<div class="map-block">
+	<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ae0b733d4b6031af27907882b3c8b6c27e39908c812cfa97f1bdc3499ad90da4d&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+</div>
+
+<div class="main-wraper">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+				<div class="second-title">
+					<h4 class="subtitle color-dr-blue-2 underline">мы</h4>
+					<h2>на связи</h2>
+				</div>
+			</div>
+		</div>
+		<div class="contact-row">
+			<div class="row">
+				<div class="col-xs-12 col-sm-4">
+					<div class="contact-entry">
+						<img class="contact-icon" src="{% static 'img/loc_icon_2_dark.png' %}" alt="">
+						<div class="contact-label color-grey-3">Адрес:</div>
+						<div class="contact-text color-dark-2">Санкт-Петербург, Казанская ул., 7, БЦ «Дворец Кваренги», оф. 12A</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<div class="contact-entry">
+						<img class="contact-icon" src="{% static 'img/mail_icon_l_dark.png' %}" alt="">
+						<div class="contact-label color-grey-3">Email:</div>
+						<a class="contact-text color-dark-2 link-dr-blue-2" href="mailto:let’s_travel@world.com">let’s_travel@world.com</a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<div class="contact-entry">
+						<img class="contact-icon" src="{% static 'img/phone_icon_3_dark.png' %}" alt="">
+						<div class="contact-label color-grey-3">Телефоны:</div>
+						<a class="contact-text color-dark-2 link-dr-blue-2" href="tel:">Тел/факс.: +7 (812) 603-20-73, 603-20-77</a>
+                        <a class="contact-text color-dark-2 link-dr-blue-2" href="tel:">Дежурный телефон: +7 904 333-96-55</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="share style-2 clearfix">
+			<ul>
+		      	<li class="color-in"><a href=""><i class="fa fa-linkedin"></i>linkedin<span class="color-in-2">19</span></a></li>
+		      	<li class="color-fb"><a href=""><i class="fa fa-facebook"></i>facebook<span class="color-fb-2">12</span></a></li>
+		      	<li class="color-tw"><a href=""><i class="fa fa-twitter"></i>twitter<span class="color-tw-2">27</span></a></li>
+		      	<li class="color-gg"><a href=""><i class="fa fa-google-plus"></i>google +<span class="color-gg-2">51</span></a></li>
+		      	<li class="color-pin"><a href=""><i class="fa fa-pinterest"></i>pinterest<span class="color-pin-2">70</span></a></li>
+	      	</ul>
+		</div>
+	</div>
+</div>
+
+
+<!-- CONTACT-FORM -->
+<div class="main-wraper padd-90">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+				<div class="second-title">
+					<h4 class="subtitle color-dr-blue-2 underline">остались</h4>
+					<h2>вопросы ?</h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<div class="second-description text-center color-grey-3">
+                    тут можно что-то написать
+                </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+					<form class="contact-form">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-style-1 type-2 color-2">
+							  	<input type="text" required="" placeholder="Ваше имя">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-style-1 type-2 color-2">
+							  	<input type="text" required="" placeholder="Ваш e-mail">
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-style-1 type-2 color-2">
+							  	<input type="text" required="" placeholder="Ваш телефон">
+							</div>
+						</div>
+					<div class="col-xs-12 col-sm-6">
+							<div class="input-style-1 type-2 color-2">
+							  	<input type="text" required="" placeholder="Направление тура">
+							</div>
+						</div>
+						<div class="col-xs-12">
+							<textarea class="area-style-1 color-1" required="" placeholder="Запрос"></textarea>
+							<button type="submit" class="c-button bg-blue-2 hv-blue-2-o"><span>Отправить на расчет</span></button>
+						</div>
+					</div>
+				</form>
+				<div class="ajax-result">
+                  <div class="success"></div>
+                  <div class="error"></div>
+                </div>
+                <div class="ajax-loader"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 {% endblock %}
 
 {% block js %}
     {{ block.super }}
 {% endblock %}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+{% load static %}
+<div class="col-xs-12 col-sm-6 col-md-3">
+    <div class="world-city black-hover background-block" style="background-image: url({{ destination.image.url }});">
+        <div class="tour-layer delay-1"></div>
+        <img class="center-image" src="{{ destination.image.url }}" alt="" style="display: none;">
+        <div class="vertical-align">
+            <h3 class="world-title color-white">{{ destination.name }}</h3>
+            <h4 class="world-price color-white">от <b>в разработке</b></h4>
+            <div class="rate">
+                <span class="fa fa-star color-yellow"></span>
+                <span class="fa fa-star color-yellow"></span>
+                <span class="fa fa-star color-yellow"></span>
+                <span class="fa fa-star color-yellow"></span>
+                <span class="fa fa-star color-yellow"></span>
+            </div>
+            <p class="color-white-light">Nunc cursus libero purus ac congue arcu cursus ut.</p>
+            <a href="#" class="c-button b-40 bg-blue-3 hv-blue-3-o"><span>все туры в {{ destination.name }}</span></a>
+        </div>
+    </div>
+</div>

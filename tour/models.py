@@ -6,10 +6,34 @@ from random import choices
 import string
 
 
+class Tag(models.Model):
+    name = models.CharField('Тег', max_length=100, blank=False, null=True)
+    nameLower = models.CharField(max_length=255, blank=True, null=True)
+    nameSlug = models.CharField(max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        slug = slugify(self.name)
+        if self.nameSlug != slug:
+            testSlug = Tag.objects.filter(nameSlug=slug)
+            slugRandom = ''
+            if testSlug:
+                slugRandom = '-' + ''.join(choices(string.ascii_lowercase + string.digits, k=2))
+            self.nameSlug = slug + slugRandom
+        self.nameLower = self.name.lower()
+        super(Tag, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return '{} '.format(self.name)
+
+    class Meta:
+        verbose_name = "Тег"
+        verbose_name_plural = "Теги"
+
 class TourVariant(models.Model):
     name = models.CharField('Вид тура', max_length=100, blank=False, null=True)
     nameLower = models.CharField(max_length=255, blank=True, null=True)
     nameSlug = models.CharField(max_length=255, blank=True, null=True)
+    imageHeader = models.ImageField('Картинка для шапки', upload_to='country_img/', blank=False, null=True)
     pageH1 = models.CharField('Тег H1', max_length=255, blank=True, null=True)
     pageTitle = models.CharField('Название страницы SEO', max_length=255, blank=True, null=True)
     pageDescription = models.CharField('Описание страницы SEO', max_length=255, blank=True, null=True)
@@ -64,11 +88,12 @@ class Country(models.Model):
     globalRegion = models.ForeignKey(GlobalRegion, blank=False, null=True, on_delete=models.CASCADE,
                                      verbose_name='Глобальный регион', related_name='global_region')
     image = models.ImageField('Картинка превью', upload_to='country_img/', blank=False)
-    imageHeader = models.ImageField('Картинка для шапки', upload_to='country_img/', blank=False)
+    imageHeader = models.ImageField('Картинка для шапки', upload_to='country_img/', blank=False, null=True)
     name = models.CharField('Страна', max_length=100, blank=False, null=True)
     isPopular = models.BooleanField('Показывать в популярных направлениях ?', default=False)
     nameLower = models.CharField(max_length=255, blank=True, null=True)
     nameSlug = models.CharField(max_length=255, blank=True, null=True)
+    shortDescription = models.CharField('Короткое описание (80 символов)', max_length=80, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         slug = slugify(self.name)
@@ -220,6 +245,7 @@ class Tour(models.Model):
     date = models.DateTimeField('Дата', blank=True, null=True)
 
     variant = models.ManyToManyField(TourVariant, verbose_name='Вид тура')
+    tag = models.ForeignKey(Tag, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Тег')
     country = models.ForeignKey(Country, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Страна')
     hotel = models.ForeignKey(Hotel, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Отель')
     flyFrom = models.ForeignKey(Town, blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Вылет из',
@@ -249,12 +275,12 @@ class Tour(models.Model):
     discountPriceRub = models.IntegerField('Стоимость со скидкой в рублях', default=0)
 
     length = models.IntegerField('Продолжительность тура', default=0)
-
-    isPopular = models.BooleanField('Показывать в популярных турах ?', default=False)
-    badge = models.CharField('Бейдж тура (выводится на карточке тура)', max_length=10, blank=True, null=True)
+    isSpecial = models.BooleanField('Показывать в специальных турах на главной ?', default=False)
+    isPopular = models.BooleanField('Показывать в популярных турах на главной?', default=False)
+    badge = models.CharField('Бейдж тура (выводится на карточке специального или популярного тура)', max_length=10, blank=True, null=True)
     isActive = models.BooleanField('Отображать в списке туров?', default=True)
     views = models.IntegerField('Просмотров', default=0)
-    rating = models.IntegerField('Рейтинг от 1 до 5', default=0)
+    rating = models.IntegerField('Рейтинг тура (в звездочках) от 1 до 5, если 0 - не отображается', default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):

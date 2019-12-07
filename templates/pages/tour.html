@@ -1,10 +1,365 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends  'basic.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}
+    {{ pageTitle }}
+{% endblock %}
+
+{% block keywords %}
+    {{ pageKeywords }}
+{% endblock %}
+
+{% block description %}
+    {{ pageDescription }}
+{% endblock %}
+{% block css %}
+
+    {{ block.super }}
+{% endblock %}
+
+
+
+{% block content %}
+   <!-- INNER-BANNER -->
+<div class="inner-banner style-6">
+	<img class="center-image" src="{{ tour.headerImage.url }}" alt="">
+	<div class="vertical-align">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-8 col-md-offset-2">
+		  			<ul class="banner-breadcrumb color-white clearfix">
+		  				<li><a class="link-blue-2" href="#">главная</a> /</li>
+		  				<li><a class="link-blue-2" href="{% url 'showalltours' %}">все туры</a> /</li>
+		  				<li><span>{{ tour.name }}</span></li>
+		  			</ul>
+		  			<h2 class="color-white">{{ tour.name }}</h2>
+  				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- DETAIL WRAPPER -->
+<div class="detail-wrapper">
+	<div class="container">
+		<div class="detail-header">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<h2 class="detail-title color-dark-2">{{ tour.name }}</h2>
+					<div class="detail-rate rate-wrap clearfix">
+				        <div class="rate">
+							<span class="fa fa-star color-yellow"></span>
+							<span class="fa fa-star color-yellow"></span>
+							<span class="fa fa-star color-yellow"></span>
+							<span class="fa fa-star color-yellow"></span>
+							<span class="fa fa-star color-yellow"></span>
+						</div>
+				      	<i>в разработке</i>
+			       	</div>
+			    </div>
+			    <div class="col-xs-12 col-sm-4">
+			    	<div class="detail-price color-dark-2"><span class="color-dr-blue"> {{ tour.priceDollar }}</span> /с человека</div>
+			    </div>
+	       	</div>
+       	</div>
+       	<div class="row padd-90">
+       		<div class="col-xs-12 col-md-8">
+       			<div class="detail-content">
+       				<div class="detail-top">
+       					<div class="embed-responsive embed-responsive-16by9">
+							<iframe class="embed-responsive-item" src="https://player.vimeo.com/video/12160490"></iframe>
+						</div>
+					</div>
+
+					<div class="detail-content-block">
+                        <div class="simple-tab color-1 tab-wrapper">
+                            <div class="tab-nav-wrapper">
+                                <div  class="nav-tab  clearfix">
+                                    <div class="nav-tab-item active">
+                                        о туре
+                                    </div>
+                                    <div class="nav-tab-item">
+                                        опции
+                                    </div>
+
+                                    <div class="nav-tab-item">
+                                        отзывы
+                                    </div>
+                                    <div class="nav-tab-item">
+                                        написать отзыв
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tabs-content clearfix">
+                                <div class="tab-info active">
+                                    {{ tour.description | safe }}
+                                </div>
+                                <div class="tab-info">
+                                    опции
+                                	  </div>
+
+                                <div class="tab-info">
+                                    отзывы
+                               </div>
+                                <div class="tab-info">
+                                    написать отзыв
+                                </div>
+                            </div>
+                        </div>
+					</div>
+					<div class="detail-content-block">
+						<h3>ответы на частые вопросы</h3>
+	                    <div class="accordion style-3">
+	                        <div class="acc-panel">
+	                            <div class="acc-title"><span class="acc-icon"></span>вопрос1</div>
+	                            <div class="acc-body">
+								ответ1
+	                            </div>
+	                        </div>
+                             <div class="acc-panel">
+	                            <div class="acc-title"><span class="acc-icon"></span>вопрос2</div>
+	                            <div class="acc-body">
+								ответ2
+	                            </div>
+	                        </div>
+                             <div class="acc-panel">
+	                            <div class="acc-title"><span class="acc-icon"></span>вопрос3</div>
+	                            <div class="acc-body">
+								ответ3
+	                            </div>
+	                        </div>
+
+	                    </div>
+					</div>
+				</div>
+       		</div>
+       		<div class="col-xs-12 col-md-4">
+       			<div class="right-sidebar">
+{#       				<div class="detail-logo bg-grey-2">#}
+{#       					<div class="detail-logo-name">Transatlantic Lines</div>#}
+{#       					<img src="img/detail/detail_logo.png" alt="">#}
+{#       				</div>#}
+       				<div class="detail-block bg-dr-blue-2">
+       					<h4 class="color-white">описание</h4>
+       					<div class="details-desc">
+							<p class="color-blue-5">категория:  <span class="color-white">тут текст</span></p>
+							<p class="color-blue-5">цена: <span class="color-white">цена</span></p>
+{#							<p class="color-blue-5">CRUISE NAME: <span class="color-white">princess</span></p>#}
+							<p class="color-blue-5">дата: <span class="color-white">дата</span></p>
+							<p class="color-blue-5">рейтинг: <span class="fa fa-star color-yellow"></span><span class="fa fa-star color-yellow"></span><span class="fa fa-star color-yellow"></span><span class="fa fa-star color-yellow"></span><span class="fa fa-star color-yellow"></span></p>
+{#							<p class="color-blue-5">: <span class="color-white">2 adult</span></p>#}
+{#							<p class="color-blue-5">Bed Type: <span class="color-white">Queen Size</span></p>#}
+{#							<p class="color-blue-5">SAVE PER ROOM: <span class="color-white">10%</span></p>#}
+						</div>
+						<div class="details-btn">
+							<a href="#" class="c-button b-40 bg-tr-1 hv-white"><span>посмотреть на карте</span></a>
+							<a href="#" class="c-button b-40 bg-white hv-transparent"><span>заказать</span></a>
+						</div>
+       				</div>
+
+					<div class="popular-tours bg-grey-2">
+						<h4 class="color-dark-2">популярные туры</h4>
+						<div class="hotel-small style-2 clearfix">
+							<a class="hotel-img black-hover" href="#">
+								<img class="img-responsive radius-0" src="img/home_9/cruise_1.jpg" alt="">
+								<div class="tour-layer delay-1"></div>
+							</a>
+							<div class="hotel-desc">
+		    					<h5><span class="color-dark-2"><strong>$273</strong>/ person</span></h5>
+		    					<h4>HAWAIAN CRUISES</h4>
+								<div class="hotel-loc tt"><strong>19.07 - 26.07 / 7</strong> nights</div>
+							</div>
+						</div>
+						<div class="hotel-small style-2 clearfix">
+							<a class="hotel-img black-hover" href="#">
+								<img class="img-responsive radius-0" src="img/home_9/cruise_2.jpg" alt="">
+								<div class="tour-layer delay-1"></div>
+							</a>
+							<div class="hotel-desc">
+		    					<h5><span class="color-dark-2"><strong>$273</strong>/ person</span></h5>
+		    					<h4>TAHITI CRUISES</h4>
+								<div class="hotel-loc tt"><strong>19.07 - 26.07 / 7</strong> nights</div>
+							</div>
+						</div>
+						<div class="hotel-small style-2 clearfix">
+							<a class="hotel-img black-hover" href="#">
+								<img class="img-responsive radius-0" src="img/home_9/cruise_3.jpg" alt="">
+								<div class="tour-layer delay-1"></div>
+							</a>
+							<div class="hotel-desc">
+		    					<h5><span class="color-dark-2"><strong>$273</strong>/ person</span></h5>
+		    					<h4>ASIA CRUISES</h4>
+								<div class="hotel-loc tt"><strong>19.07 - 26.07 / 7</strong> nights</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="help-contact bg-grey-2">
+						<h4 class="color-dark-2">нужна помощь?</h4>
+						<p class="color-grey-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						<a class="help-phone color-dark-2 link-dr-blue-2" href="tel:0200059600"><img src="{% static 'img/phone24-dark-2.png' %}" alt="">020 00 59 600</a>
+						<a class="help-mail color-dark-2 link-dr-blue-2" href="mailto:let’s_travel@world.com"><img src="{% static 'img/letter-dark-2.png' %}" alt="">let’s_travel@world.com</a>
+					</div>
+       			</div>
+       		</div>
+       	</div>
+{#       	<div class="may-interested padd-90">#}
+{#	       	<div class="row">#}
+{#	       		<div class="col-mob-12 col-xs-6 col-sm-6 col-md-3">#}
+{#			        <div class="hotel-item style-6">#}
+{#			          	<div class="radius-top">#}
+{#			          	 	<img src="img/home_9/tour_1.jpg" alt="">#}
+{#			          	</div>#}
+{#			          	<div class="title">#}
+{#							<div class="tour-info-line clearfix">#}
+{#								<div class="tour-info fl">#}
+{#						  	 		<img src="img/calendar_icon_grey.png" alt="">#}
+{#						  	 		<span class="font-style-2 color-grey-3">July <strong>19th 2015</strong></span>#}
+{#						  	 	</div>#}
+{#								<div class="tour-info fl">#}
+{#						  	 		<img src="img/loc_icon_small_grey.png" alt="">#}
+{#						  	 		<span class="font-style-2 color-grey-3">alaska</span>#}
+{#						  	 	</div>#}
+{#							</div>#}
+{#			          	    <h4><b>ALASKA LAND cruise</b></h4>#}
+{#		          	         <div class="rate-wrap">#}
+{#			          	        <div class="rate">#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#								</div>#}
+{#							    <i>485 rewies</i>#}
+{#		                    </div>#}
+{#				            <h5>from <strong>$860</strong> / person</h5>#}
+{#				            <p class="f-14 color-grey-3">San Juan, Charlotte Amalie, Philipsburg, Castries, Basseterre, Ponta Delgada, Southampton.</p>#}
+{#				            <a href="#" class="c-button b-50 bg-grey-3-t1 hv-grey-3-t">detail</a>#}
+{#				            <a href="#" class="c-button bg-dr-blue-2 hv-dr-blue-2-o fr">book now</a>#}
+{#			            </div>#}
+{#			        </div>#}
+{#	       		</div>#}
+{#	       		<div class="col-mob-12 col-xs-6 col-sm-6 col-md-3">#}
+{#			        <div class="hotel-item style-6">#}
+{#			          	<div class="radius-top">#}
+{#			          	 	<img src="img/home_9/tour_2.jpg" alt="">#}
+{#			          	</div>#}
+{#			          	<div class="title">#}
+{#							<div class="tour-info-line clearfix">#}
+{#								<div class="tour-info fl">#}
+{#						  	 		<img src="img/calendar_icon_grey.png" alt="">#}
+{#						  	 		<span class="font-style-2 color-grey-3">July <strong>19th 2015</strong></span>#}
+{#						  	 	</div>#}
+{#								<div class="tour-info fl">#}
+{#						  	 		<img src="img/loc_icon_small_grey.png" alt="">#}
+{#						  	 		<span class="font-style-2 color-grey-3">alaska</span>#}
+{#						  	 	</div>#}
+{#							</div>#}
+{#			          	    <h4><b>ASIA & AFRICA CRUISES</b></h4>#}
+{#		          	         <div class="rate-wrap">#}
+{#			          	        <div class="rate">#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#								</div>#}
+{#							    <i>485 rewies</i>#}
+{#		                    </div>#}
+{#				            <h5>from <strong>$600</strong> / person</h5>#}
+{#				            <p class="f-14 color-grey-3">San Juan, Charlotte Amalie, Philipsburg, Castries, Basseterre, Ponta Delgada, Southampton.</p>#}
+{#				            <a href="#" class="c-button b-50 bg-grey-3-t1 hv-grey-3-t">detail</a>#}
+{#				            <a href="#" class="c-button bg-dr-blue-2 hv-dr-blue-2-o fr">book now</a>#}
+{#			            </div>#}
+{#			        </div>#}
+{#	       		</div>#}
+{#	       		<div class="col-mob-12 col-xs-6 col-sm-6 col-md-3">#}
+{#			        <div class="hotel-item style-6">#}
+{#			          	<div class="radius-top">#}
+{#			          	 	<img src="img/home_9/tour_3.jpg" alt="">#}
+{#			          	</div>#}
+{#			          	<div class="title">#}
+{#							<div class="tour-info-line clearfix">#}
+{#								<div class="tour-info fl">#}
+{#						  	 		<img src="img/calendar_icon_grey.png" alt="">#}
+{#						  	 		<span class="font-style-2 color-grey-3">July <strong>19th 2015</strong></span>#}
+{#						  	 	</div>#}
+{#								<div class="tour-info fl">#}
+{#						  	 		<img src="img/loc_icon_small_grey.png" alt="">#}
+{#						  	 		<span class="font-style-2 color-grey-3">alaska</span>#}
+{#						  	 	</div>#}
+{#							</div>#}
+{#			          	    <h4><b>NEW ENGLAND CRUISES</b></h4>#}
+{#		          	         <div class="rate-wrap">#}
+{#			          	        <div class="rate">#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#								</div>#}
+{#							    <i>485 rewies</i>#}
+{#		                    </div>#}
+{#				            <h5>from <strong>$455</strong> / person</h5>#}
+{#				            <p class="f-14 color-grey-3">San Juan, Charlotte Amalie, Philipsburg, Castries, Basseterre, Ponta Delgada, Southampton.</p>#}
+{#				            <a href="#" class="c-button b-50 bg-grey-3-t1 hv-grey-3-t">detail</a>#}
+{#				            <a href="#" class="c-button bg-dr-blue-2 hv-dr-blue-2-o fr">book now</a>#}
+{#			            </div>#}
+{#			        </div>#}
+{#	       		</div>#}
+{#	       		<div class="col-mob-12 col-xs-6 col-sm-6 col-md-3">#}
+{#			        <div class="hotel-item style-6">#}
+{#			          	<div class="radius-top">#}
+{#			          	 	<img src="img/home_9/tour_4.jpg" alt="">#}
+{#			          	</div>#}
+{#			          	<div class="title">#}
+{#							<div class="tour-info-line clearfix">#}
+{#								<div class="tour-info fl">#}
+{#						  	 		<img src="img/calendar_icon_grey.png" alt="">#}
+{#						  	 		<span class="font-style-2 color-grey-3">July <strong>19th 2015</strong></span>#}
+{#						  	 	</div>#}
+{#								<div class="tour-info fl">#}
+{#						  	 		<img src="img/loc_icon_small_grey.png" alt="">#}
+{#						  	 		<span class="font-style-2 color-grey-3">alaska</span>#}
+{#						  	 	</div>#}
+{#							</div>#}
+{#			          	    <h4><b>PACIFIC COAST CRUISES</b></h4>#}
+{#		          	         <div class="rate-wrap">#}
+{#			          	        <div class="rate">#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#									<span class="fa fa-star color-yellow"></span>#}
+{#								</div>#}
+{#							    <i>485 rewies</i>#}
+{#		                    </div>#}
+{#				            <h5>from <strong>$990</strong> / person</h5>#}
+{#				            <p class="f-14 color-grey-3">San Juan, Charlotte Amalie, Philipsburg, Castries, Basseterre, Ponta Delgada, Southampton.</p>#}
+{#				            <a href="#" class="c-button b-50 bg-grey-3-t1 hv-grey-3-t">detail</a>#}
+{#				            <a href="#" class="c-button bg-dr-blue-2 hv-dr-blue-2-o fr">book now</a>#}
+{#			            </div>#}
+{#			        </div>#}
+{#	       		</div>#}
+{#	       	</div>#}
+{#       	</div>#}
+	</div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

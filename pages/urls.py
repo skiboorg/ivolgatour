@@ -10,9 +10,9 @@ urlpatterns = [
     path('index.php', RedirectView.as_view(url='/', permanent=False), name='index2'),
     #path('services/', views.services, name='services'),
     # path('service/<slug>/', views.service, name='service'),
-    # path('contacts/', views.contacts, name='contacts'),
+    path('contacts/', views.contacts, name='contacts'),
     # path('about/', views.about, name='about'),
-    # path('projects/', views.projects, name='projects'),
+    path('destinations/', views.destinations, name='destinations'),
     # path('callback/', views.callback, name='callback'),
 
 

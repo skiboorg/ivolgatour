@@ -28,9 +28,9 @@
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <ul class="banner-breadcrumb color-white clearfix">
                             <li><a class="link-blue-2" href="#">главная</a> /</li>
-                            <li><span>все направления</span></li>
+                            <li><span>{{ region.name }}</span></li>
                         </ul>
-                        <h2 class="color-white">все направления</h2>
+                        <h2 class="color-white">{{ region.name }}</h2>
                         {#	  			<p class="color-white-light">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id pharetra lacus, et hendrerit mi quis leo elementum. Lorem ipsum dolor sit.</p>#}
                     </div>
                 </div>
@@ -40,7 +40,7 @@
     <div class="main-wraper padd-90">
         <div class="container">
             <div class="row">
-                {% for destination in allDestinations %}
+                {% for destination in allCountries %}
                    {% include 'pages/town_card.html' %}
                 {% endfor %}
             </div>

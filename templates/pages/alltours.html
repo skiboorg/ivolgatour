@@ -20,17 +20,17 @@
 
 
 {% block content %}
-    <div class="inner-banner style-5 background-block" style="background-image: url({% static 'img/bg_5.jpg' %}); margin-bottom: 40px">
-        <img class="center-image" src="{% static 'img/bg_5.jpg' %}" alt="" style="display: none;">
+    <div class="inner-banner style-5 background-block" style="background: url({% static 'img/alltours-header.jpg' %}) center 0; margin-bottom: 40px">
+
         <div class="vertical-align">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <ul class="banner-breadcrumb color-white clearfix">
                             <li><a class="link-blue-2" href="#">главная</a> /</li>
-                            <li><span>все направления</span></li>
+                            <li><span>все туры</span></li>
                         </ul>
-                        <h2 class="color-white">все направления</h2>
+                        <h2 class="color-white">все туры</h2>
                         {#	  			<p class="color-white-light">Curabitur nunc erat, consequat in erat ut, congue bibendum nulla. Suspendisse id pharetra lacus, et hendrerit mi quis leo elementum. Lorem ipsum dolor sit.</p>#}
                     </div>
                 </div>
@@ -40,8 +40,8 @@
     <div class="main-wraper padd-90">
         <div class="container">
             <div class="row">
-                {% for destination in allDestinations %}
-                   {% include 'pages/town_card.html' %}
+                {% for tour in allTours %}
+                   {% include 'pages/small_tour_card.html' %}
                 {% endfor %}
             </div>
         </div>
